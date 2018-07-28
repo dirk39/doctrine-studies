@@ -1,0 +1,37 @@
+version: '3'
+
+networks:
+  default:
+
+services:
+  db:
+    image: mysql:latest
+    container_name: db
+    volumes:
+    - ../MySqlData:/var/lib/mysql
+    ports:
+    - 3306:3306
+    command: mysqld --sql_mode="ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  code:
+    image: php:latest
+    container_name: code
+    tty: true
+    networks:
+      - default
+    volumes:
+    - ./../source:/code
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+        - 8080:80
+    networks:
+        - default

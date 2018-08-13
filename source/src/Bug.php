@@ -119,4 +119,9 @@ class Bug
     return $this->engineer;
   }
 
+  public function close()
+  {
+    $this->status = 'CLOSE';
+  }
+
 }

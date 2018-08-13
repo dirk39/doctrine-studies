@@ -109,4 +109,14 @@ class Bug
     return $this->products;
   }
 
+  public function getReporter()
+  {
+    return $this->reporter;
+  }
+
+  public function getEngineer()
+  {
+    return $this->engineer;
+  }
+
 }
